@@ -1,2 +1,2 @@
 # SPRINGBOOT-Employee manager
- Employee manager with JAVA-SPRINGBOOT
+ Employee manager with JAVA-SPRINGBOOT & ANGULAR
