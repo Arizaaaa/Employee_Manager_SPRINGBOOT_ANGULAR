@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import prueba.spring.employeemanager.model.Employee;
 import prueba.spring.employeemanager.repo.EmployeeRepo;
 
+@Service
 public class EmployeeService {
     private final EmployeeRepo employeeRepo;
 
@@ -37,8 +39,3 @@ public class EmployeeService {
         employeeRepo.deleteEmployeeById(id);
     }
 }
-
-
-
-
-//min 38:50
