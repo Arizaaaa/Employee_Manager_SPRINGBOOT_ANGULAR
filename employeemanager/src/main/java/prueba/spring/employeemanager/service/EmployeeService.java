@@ -13,7 +13,6 @@ import prueba.spring.employeemanager.repo.EmployeeRepo;
 public class EmployeeService {
     private final EmployeeRepo employeeRepo;
 
-    @Autowired
     public EmployeeService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
     }
