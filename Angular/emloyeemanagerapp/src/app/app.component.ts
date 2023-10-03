@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AppComponent implements OnInit{
   public employees: Employee[] | undefined;
+  public deleteEmployee: Employee | undefined;
+  public updateEmployee: Employee | undefined;
+
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    jobTitle: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    imageUrl: new FormControl('', [Validators.required]),
+  });
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -28,7 +39,48 @@ export class AppComponent implements OnInit{
     )
   }
 
-  public onOpenModal(mode:string, employee?: Employee): void {
+  public onUpdateEmployee(updateForm: NgForm): void{
+    document.getElementById('update-employee-form')?.click();
+    this.employeeService.updateEmployee(updateForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+        window.location.reload();
+      },
+      (error: HttpErrorResponse) => { 
+        alert(error.message);
+      },
+    );
+  }
+
+  public onAddEmployee(addForm: NgForm): void{
+    document.getElementById('add-employee-form')?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+        window.location.reload();
+      },
+      (error: HttpErrorResponse) => { 
+        alert(error.message);
+      },
+    );
+  }
+
+  public onDeleteEmployee(): void{
+    this.employeeService.deleteEmployee(this.deleteEmployee?.id).subscribe(
+    (response) => {
+      console.log(response);
+      this.getEmployees;
+      window.location.reload();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+      );
+  }
+
+  public onOpenModal(mode:string, employee?: Employee): any {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -39,9 +91,11 @@ export class AppComponent implements OnInit{
     }
     if (mode === 'update') {
       button.setAttribute('data-target', '#updateEmployeeModal');
+      this.updateEmployee = employee;
     }
     if (mode === 'delete') {
       button.setAttribute('data-target', '#deleteEmployeeModal');
+      this.deleteEmployee = employee;
     }
     container?.appendChild(button);
     button.click();

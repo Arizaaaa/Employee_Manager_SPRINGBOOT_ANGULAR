@@ -3,7 +3,6 @@ package prueba.spring.employeemanager.service;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import prueba.spring.employeemanager.model.Employee;
