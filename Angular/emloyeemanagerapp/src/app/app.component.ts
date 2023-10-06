@@ -39,13 +39,12 @@ export class AppComponent implements OnInit{
     )
   }
 
-  public onUpdateEmployee(updateForm: NgForm): void{
+  public onUpdateEmployee(employee: Employee): void{
     document.getElementById('update-employee-form')?.click();
-    this.employeeService.updateEmployee(updateForm.value).subscribe(
+    this.employeeService.updateEmployee(employee).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
-        window.location.reload();
       },
       (error: HttpErrorResponse) => { 
         alert(error.message);
@@ -59,23 +58,25 @@ export class AppComponent implements OnInit{
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
-        window.location.reload();
+        addForm.reset();
       },
       (error: HttpErrorResponse) => { 
+        addForm.reset();
         alert(error.message);
       },
     );
   }
 
-  public onDeleteEmployee(): void{
-    this.employeeService.deleteEmployee(this.deleteEmployee?.id).subscribe(
-    (response) => {
+  public onDeleteEmployee(employeeId?: number): void{
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+    (response: void) => {
       console.log(response);
       this.getEmployees;
       window.location.reload();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
+      window.location.reload();
     }
       );
   }
