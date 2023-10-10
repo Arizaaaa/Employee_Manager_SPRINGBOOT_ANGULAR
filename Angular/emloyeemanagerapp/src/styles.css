@@ -37,4 +37,5 @@ a {
 }
 .addEmployee{
     cursor: pointer;
+    color: #8c8c8c !important;
 }

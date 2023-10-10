@@ -11,7 +11,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input type="search" name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search employees...">
+      <input (ngModelChange)="searchEmployee(key.value)" #key="ngModel" ngModel type="search" name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search employees...">
     </form>
   </div>
 </nav>
@@ -147,5 +147,13 @@
         <button type="button" (click)="onDeleteEmployee(deleteEmployee?.id)" class="btn btn-primary">Yes</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Notification for no employees -->
+<div *ngIf="employees?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No employees!</h4>
+    <p>No employees were found</p>
   </div>
 </div>
