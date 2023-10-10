@@ -1,4 +1,6 @@
 # SPRINGBOOT-Employee manager
  Employee manager with JAVA-SPRINGBOOT & ANGULAR
 
-   Aplicación web de un administrador de empleados usando Springboot y angular
+   Administrador de empleados usando Springboot y Angular
+
+   Aplicación donde puedes añadir, modificar, eliminar y buscar empleados.
